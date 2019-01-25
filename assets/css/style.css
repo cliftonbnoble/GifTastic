@@ -6,7 +6,8 @@ body {
     background-size: cover;
 }
 p {
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Luckiest Guy', cursive;
+    /* font-family: 'Permanent Marker', cursive; */
     font-size: 36px;
 }
 .searchBtn {
@@ -14,6 +15,12 @@ p {
     font-size:  18px;
 }
 .instructions {
-    font-family: 'Bangers', cursive;
-    font-size: 20px;
+    font-family: 'Press Start 2P', cursive;
+    /* font-family: 'Bangers', cursive; */
+    font-size: 24px;
+}
+.title-banner {
+    font-family: 'Luckiest Guy', cursive;
+    /* font-family: 'Permanent Marker', cursive; */
+    font-size: 48px;
 }
