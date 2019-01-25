@@ -1,0 +1,19 @@
+body {
+    background: url(../../assets/images/web-background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+p {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 36px;
+}
+.searchBtn {
+    font-family: 'Acme', sans-serif;
+    font-size:  18px;
+}
+.instructions {
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+}
