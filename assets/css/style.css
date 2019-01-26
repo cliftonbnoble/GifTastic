@@ -15,7 +15,8 @@ p {
     font-size:  18px;
 }
 .instructions {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Prosto One', cursive;
+    /* font-family: 'Press Start 2P', cursive; */
     /* font-family: 'Bangers', cursive; */
     font-size: 24px;
 }
