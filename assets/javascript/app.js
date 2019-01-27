@@ -1,14 +1,12 @@
-//Global
-let comedy = ['Dave Chapelle', 'Will Ferrell', 'Aziz Ansari', 'Sarah Silverman', 'Stephen Colbert', 'Danny McBride', 'Seth Rogan', 'Terry Crews'];
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+//Global Variables
+let comedy = ['Dave Chapelle', 'Will Ferrell', 'Terry Crews', 'Aziz Ansari', 'Stephen Colbert', 'Danny McBride', 'Seth Rogan'];
 let stillImg = "";
 let animateImg = "";
 let stillGif = "";
 let animateGif = "";
-
-
-//API Variables
-// let queryUrl = "https://api.giphy.com/v1/gifs/search?q=";
-// let apiKey = "j9FXfLpusMtwoO373uYUB8djAOtzZVOa&limit=10";
 
 //Function to create buttons from comedy array
 let createButtons = function () {
@@ -18,10 +16,12 @@ let createButtons = function () {
         btnDiv.attr("data-person", comedy[i]);
         btnDiv.text(comedy[i]);
         $(".btn-area").append(btnDiv);
-        
     }
-    //Create on click function
+
+//Create on click function
 $(".searchBtn").on("click", function() {
+//Empty out instructions area for Gifs
+$(".instructions").empty();
 let btnName = $(this).attr("data-person");
 console.log(this);
 console.log("button name: ", btnName);
@@ -45,58 +45,64 @@ $.ajax({
     animateGif = results[j].images.fixed_height.url;
         //Ratings
     let ratings = results[j].rating;
-    //Elements
+    //Create Elements
     let gifDiv = $("<div>");
     let p = $("<h3>").text("Rating: " + ratings);
     let gifImg = $("<img>");
-    //Giving GIFS settings
-    gifDiv.addClass("gif");
-    gifDiv.attr("data-state", "still");
-    gifImg.attr("src", stillImg, "data-still");
+    //Add class to P tag for styling purposes
+    p.addClass("imdb");
+    //Give animate attributes
+    gifImg.attr("data-still", stillImg);
     gifImg.attr("data-animate", animateGif);
-    gifDiv.append(p, gifImg);
+    gifImg.attr("src", stillImg);
+    gifImg.attr("data-type", "still");
+    gifImg.addClass("gif");
+    //Append to Div
+    gifDiv.append(gifImg, p);
     // gifDiv.append(gifImg);
     $(".gif-area").prepend(gifDiv);
     console.log("animate GIF: ", animateGif);
-    console.log("Still GIF: ", stillImg);
-        
+    console.log("Still GIF: ", stillImg);   
     }
-    $(document).on("click", ".gif", function () {
-    let state = $(this).attr("data-state");
-    console.log("Atribute: ", state);
-    if (state === "still") {
-        $(this).attr("src", $(this).attr(animateGif));
-        $(this).attr("data-state", "animate");
-        console.log("this: ", this);
-    } else {
-        $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-    }
-    
-})
-
-});
-
-//End of click function
-});
-}
-// $(document).on("click", ".gif", function () {
-//     let state = $(this).attr("data-state");
+//     $(document).on("click", ".gif", function () {
+//         animateImg = $(this).data("animate");
+//         stillGif = $(this).data("still")
+//     let state = $(this).data("type");
 //     console.log("Atribute: ", state);
+//     console.log("this: ", this);
 //     if (state === "still") {
-//         $(this).attr("src", animateGif, "data-state", "animate");
-//         // $(this).attr("data-state", "animate");
-//         console.log("this: ", this);
-//     } else {
-//         $(this).attr("src", $(this).attr("data-still"));
-//         $(this).attr("data-state", "still");
-//     }
-    
+//         $(this).attr("src", animateImg);
+//         $(this).data("type", "animate");
+//         console.log("this in If statement: ", this);
+//     } else if (state === "animate"){
+//         $(this).attr("src", stillGif);
+//         $(this).data("type", "still");
+//     }  
 // })
+});
+});
 
+}
+$(document).on("click", ".gif", function () {
+    animateImg = $(this).data("animate");
+    stillGif = $(this).data("still")
+let state = $(this).data("type");
+console.log("Atribute: ", state);
+console.log("this: ", this);
+if (state === "still") {
+    $(this).attr("src", animateImg);
+    $(this).data("type", "animate");
+    console.log("this in If statement: ", this);
+} else if (state === "animate"){
+    $(this).attr("src", stillGif);
+    $(this).data("type", "still");
+}  
+})
 //Submit Button
 $("#user-input").on("click", function (event) {
     submit();
+    $('.form-control').val("");
+    // return false
 })
 let submit = function () {
     event.preventDefault();
@@ -106,7 +112,17 @@ let submit = function () {
     createButtons();
     console.log("BUTTON INFO: ", userInput);
     console.log(event);
-    // $("#searchBar").html("");
+    // return false
 }
+//When Enter is pressed.....
+$(".form-control").keydown(function(event){
+    if(event.keyCode == 13){
+        console.log("working");
+        submit();
+        $('.form-control').val("");
+        // return false
+    }
+});
 //Main Process
-createButtons();    
+createButtons();
+});
