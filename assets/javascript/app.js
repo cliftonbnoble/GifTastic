@@ -106,8 +106,11 @@ $("#user-input").on("click", function (event) {
 })
 let submit = function () {
     event.preventDefault();
-    let userInput = $(".form-control").val();
-    comedy.push(userInput);
+    let userInput = $(".form-control").val().trim().toLowerCase();
+    if (comedy.includes(userInput)) {
+        return
+    }
+    comedy.push(userInput.toLowerCase());
     $(".btn-area").empty();
     createButtons();
     console.log("BUTTON INFO: ", userInput);
